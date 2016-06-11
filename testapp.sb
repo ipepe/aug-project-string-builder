@@ -1,0 +1,10 @@
+liczba := 5
+tekst := "Witaj"
+
+if liczba == length(tekst) and liczba == 5 then
+  tekst = concatenate(tekst, " swiecie")
+else
+  tekst = "Witaj swiecie"
+end
+
+print(tekst)
