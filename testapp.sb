@@ -5,7 +5,6 @@ if liczba == length(tekst) and liczba == 5 then
   tekst = concatenate(tekst, " swiecie")
 else
   tekst = "Witaj swiecie"
-end
 
 print(tekst)
 
@@ -14,7 +13,6 @@ begin
         liczba = readint
     else
         tekst = readstr
-    end
 end
 
 tekst = substring(tekst, liczba, 4)
