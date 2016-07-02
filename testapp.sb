@@ -37,7 +37,7 @@ begin
     exit
 end;
 
-if liczba == "Ala" then print("Takie same");
+if "Ala" == "Ala" then print("Takie same");
 if "Ala" == "Alaa" then print("Takie same") else print("Rozne");
 
 if false then print("True") else
@@ -46,5 +46,11 @@ begin
   print("Drugi skomplikowany print fałsz")
 end;
 
+print("Podaj swoje imie: ");
+imie := readstr;
 
-print("Koniec na dzis")
+print( concatenate( "Koniec na dzis ", imie ) );
+
+print("Żegnam się błędem");
+x := "Ala";
+if liczba == x then print("To ciekawe...")

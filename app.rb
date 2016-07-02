@@ -16,8 +16,8 @@ begin
   begin
     StringBuilderParser.parse(lex_array).exec({})
   rescue RuntimeError => e
-    puts "\nBłąd interpretacji: #{e.message}".red
+    puts "\nInterpretation Error: #{e.message}".red
   end
 rescue RLTK::NotInLanguage
-  puts "Plik niezgodny z gramatyka".red
+  puts "Syntax error".red
 end
