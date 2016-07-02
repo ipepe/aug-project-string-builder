@@ -198,7 +198,7 @@ end
 
 class WhileClause < SimpleInstruction
   child :condition, BoolExpression
-  child :block, Instruction
+  child :block, SimpleInstruction
 
   def exec(variables)
     while(@condition.exec(variables))
