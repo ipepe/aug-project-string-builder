@@ -1,0 +1,3 @@
+testowy_kot := "Patryk";
+print("Substring kota Patryk to:");
+print(substring(testowy_kot, 3,3))

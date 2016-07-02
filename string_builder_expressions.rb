@@ -37,6 +37,14 @@ class NumberOperation < Expression
     case @type
       when '+'
         @left.exec(vars) + @right.exec(vars)
+      when '-'
+        @left.exec(vars) - @right.exec(vars)
+      when '*'
+        @left.exec(vars) * @right.exec(vars)
+      when '/'
+        @left.exec(vars) / @right.exec(vars)
+      when '%'
+        @left.exec(vars) % @right.exec(vars)
       else
         raise "Unknown NumberOperation for #{@type}"
     end
@@ -74,6 +82,18 @@ class Call < SimpleInstruction
         else
           raise "One of values is not a String: val1=#{val1.class} val2=#{val2.class}"
         end
+      when :length then
+        @first.exec(variables).size
+      when :position then
+        @first.exec(variables).index(@second.exec(variables)).to_i
+      when :substr
+        @first.exec(variables)[@second.exec(variables), @third.exec(variables)]
+      when :readint
+        gets().to_i
+      when :readstr
+        gets()
+      when :exit
+        exit()
       else
         raise "Unknown type #{@type}"
     end
@@ -86,27 +106,51 @@ end
 #     :true
 #   end
 # end
+class LogicCompareExpression < Expression
+  value :type, String
+end
 
-class BoolExpression < Expression
-  value :type, Symbol
-  child :left, BoolExpression
-  child :right, BoolExpression
+
+class BoolExpression < LogicCompareExpression
+  child :left, LogicCompareExpression
+  child :right, LogicCompareExpression
 
   def exec(vars)
     case @type
-      when :not then
-        !@left.exec(vars)
+      when 'not' then
+        if @left.nil?
+          return false
+        else
+          !@left.exec(vars)
+        end
+      when 'and' then
+        @left.exec(vars) && @right.exec(vars)
+      when 'or' then
+        @left.exec(vars) || @right.exec(vars)
       else
         raise "Unknown BoolExpression #{@type}"
     end
   end
 end
 
-class NumberRelation < BoolExpression
-  def exec(variables)
+class NumberRelation < LogicCompareExpression
+  child :left, Expression
+  child :right, Expression
+
+  def exec(var)
     case @type
-      when '<'
-        @left.exec(variables) < @right.exec(variables)
+      when '<' then
+        @left.exec(var) < @right.exec(var)
+      when '=' then
+        @left.exec(var) == @right.exec(var)
+      when '<>' then
+        @left.exec(var) != @right.exec(var)
+      when '<=' then
+        @left.exec(var) <= @right.exec(var)
+      when '>=' then
+        @left.exec(var) >= @right.exec(var)
+      when '>' then
+        @left.exec(var) > @right.exec(var)
       else
         raise "Unknown operation #{@type} on numbers"
     end
@@ -131,8 +175,15 @@ class Instruction < Expression
   end
 end
 
+class BeginEndBlock < SimpleInstruction
+  child :instruction, Instruction
+  def exec(variables)
+    @instruction.exec(variables)
+  end
+end
+
 class IfClause < SimpleInstruction
-  child :condition, BoolExpression
+  child :condition, LogicCompareExpression
   child :first, SimpleInstruction
   child :second, SimpleInstruction
 

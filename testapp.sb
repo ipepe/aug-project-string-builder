@@ -9,7 +9,7 @@ tekst := concatenate(tekst, " Polska gola");
 
 print(tekst);
 
-while liczba < 10 do
+while liczba < 10 and (true and not false) do
 begin
   liczba := liczba + 1;
   print("Petla")
@@ -17,6 +17,27 @@ end;
 
 print("Po petli");
 
-if true and (true and true) then print("Prawda")
+
+if (true and (true and true)) then print("Prawda");
+
+if length("1234") = 4 then print("Test length - sukces");
+
+if position("Ala ma kota"," kot") = 6 then print("Test position - sukces");
+
+testowykot := "Patryk";
+print("Substring kota Patryk to:");
+print(substring(testowykot, 3,3));
 
 
+print("Podaj 5 na wejsciu: ");
+
+if readint = 5 then print("Gratulacje jest piona!") else
+begin
+    print("Oj nie dostalem 5 wiec wychodze");
+    exit
+end;
+
+if false then print("True") else print("False");
+
+
+print("Koniec na dzis")
