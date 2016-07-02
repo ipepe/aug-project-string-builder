@@ -22,8 +22,8 @@ class Variable < Expression
   value :type, Symbol
   def exec(variables)
     var = variables[@name]
-    raise "1 Text cannot be number" if var.is_a?(String) && @type == :number
-    raise "2 Number cannot be text" if var.is_a?(Fixnum) && @type == :text
+    raise "You referenced #{@name} like a Number but it is a Text" if var.is_a?(String) && @type == :number
+    raise "You referenced #{@name} like a Text but it is a Number" if var.is_a?(Fixnum) && @type == :text
     var
   end
 end
@@ -57,8 +57,8 @@ class Assign < SimpleInstruction
 
   def exec(variables)
     var = @right.exec(variables)
-    raise "3 Number is not text" if var.is_a?(Fixnum) && @type == :text
-    raise "4 Text is not a number" if var.is_a?(String) && @type == :number
+    raise "You tried to assign variable #{@name} like a Text but it is a Number" if var.is_a?(Fixnum) && @type == :text
+    raise "You tried to assign variable #{@name} like a Number but it is a Text" if var.is_a?(String) && @type == :number
     variables[@name] = var
     var
   end

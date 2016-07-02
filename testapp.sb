@@ -37,7 +37,7 @@ begin
     exit
 end;
 
-if "Ala" == "Ala" then print("Takie same");
+if liczba == "Ala" then print("Takie same");
 if "Ala" == "Alaa" then print("Takie same") else print("Rozne");
 
 if false then print("True") else

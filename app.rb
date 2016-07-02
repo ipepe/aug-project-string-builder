@@ -1,4 +1,5 @@
 require 'pry'
+require 'colorize'
 
 require 'rltk'
 require 'rltk/ast'
@@ -12,7 +13,11 @@ require_relative 'string_builder_parser'
 
 begin
   lex_array = StringBuilderLexer.lex_file('./testapp.sb')
-  StringBuilderParser.parse(lex_array).exec({})
+  begin
+    StringBuilderParser.parse(lex_array).exec({})
+  rescue RuntimeError => e
+    puts "\nBłąd interpretacji: #{e.message}".red
+  end
 rescue RLTK::NotInLanguage
-  puts "Plik niezgodny z gramatyka"
+  puts "Plik niezgodny z gramatyka".red
 end
