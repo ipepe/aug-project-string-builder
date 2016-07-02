@@ -37,7 +37,11 @@ begin
     exit
 end;
 
-if false then print("True") else print("False");
+if false then print("True") else
+begin
+  print("False");
+  print("Drugi skomplikowany print fałsz")
+end;
 
 
 print("Koniec na dzis")
