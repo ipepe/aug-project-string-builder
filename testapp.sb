@@ -1,21 +1,22 @@
-liczba = 5;
-tekst = "Witaj";
+liczba := 5;
+tekst := "Witaj";
 
-if liczba == length(tekst) and liczba == 5 then
-  tekst = concatenate(tekst, " swiecie");
-else
-  tekst = "Witaj swiecie";
+tekst := concatenate(tekst, " swiecie");
 
 print(tekst);
 
+tekst := concatenate(tekst, " Polska gola");
+
+print(tekst);
+
+while liczba < 10 do
 begin
-    if 50 != 50 or not false and true
-        liczba = readint;
-    else
-        tekst = readstr;
-end
+  liczba := liczba + 1;
+  print("Petla")
+end;
 
-tekst = substring(tekst, liczba, 4);
+print("Po petli");
 
-print("Pozycja la w Ala ma kota to:");
-print(position("Ala ma kota", "la ");
+if true and (true and true) then print("Prawda")
+
+

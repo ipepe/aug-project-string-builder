@@ -8,9 +8,9 @@ class StringBuilderLexer < RLTK::Lexer
 
   rule(/not/)   { :NOT }
   rule(/do/)    { :DO }
-  rule(/readint/) { :READINTEGER }
-  rule(/readstr/) { :READSTRING }
-  rule(/begin/) { :BEGINBLOCK }
+  rule(/readint/) { :READINT }
+  rule(/readstr/) { :READSTR }
+  rule(/begin/) { :BEGIN }
   rule(/exit/) { :EXIT }
   rule(/position/) { :POSITION }
 
@@ -24,6 +24,10 @@ class StringBuilderLexer < RLTK::Lexer
   rule(/concatenate/) { :CONCAT }
   rule(/substring/) { :SUBSTR }
 
+  # String operators
+  rule(/==/) { :STR_COMPARE }
+  rule(/!=/) { :STR_DIFFRENT_COMPARE }
+
   # Numeric operators
   rule(/\+/) { :NUM_PLUS }
   rule(/-/)  { :NUM_MINUS }
@@ -36,7 +40,7 @@ class StringBuilderLexer < RLTK::Lexer
   rule(/>=/) { :MORE_OR_EQUAL }
   rule(/</) { :LESS_THAN }
   rule(/>/) { :MORE_THAN }
-  rule(/=/) { :ASSIGN }
+  rule(/=/) { :EQUALS_SIGN }
 
 
   # Language
@@ -45,19 +49,16 @@ class StringBuilderLexer < RLTK::Lexer
   rule(/\)/)	{ :RPAREN }
   rule(/,/) { :COMMA }
 
-  # String operators
-  rule(/==/) { :STR_COMPARE }
-  rule(/!=/) { :STR_DIFFRENT_COMPARE }
-
   rule(/:=/) { :ASSIGN }
-  rule(/(true|false)/) { |t| [:BOOLEAN, t] }
-  rule(/[A-Za-z][A-Za-z0-9]*/) { |t| [ :IDENTIFIER, t] }
+  rule(/true/)  { :TRUE_BOOL }
+  rule(/false/) { :FALSE_BOOL }
+  rule(/[A-Za-z][A-Za-z0-9]*/) { |t| [:IDENT, t] }
 
   # Number
   rule(/\d+/)      { |t| [:NUMBER, t.to_i] }
 
   # String
-  rule(/"[^"|\n]*"/) { |t| [:STRING, t.to_s[1..-2] ] }
+  rule(/"[^"|\n]*"/) { |t| [:TEXT, t.to_s[1..-2] ] }
 
   rule(/\s/)
 end
