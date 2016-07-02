@@ -77,8 +77,8 @@ class StringBuilderParser < RLTK::Parser
   end
 
   production(:txt_rel) do
-    clause('STR_COMPARE') { |n| n }
-    clause('STR_DIFFRENT_COMPARE') { |n| n }
+    clause('STR_COMPARE') { |n| '==' }
+    clause('STR_DIFFRENT_COMPARE') { |n| '!=' }
   end
 
   production(:bool_op) do

@@ -157,7 +157,21 @@ class NumberRelation < LogicCompareExpression
   end
 end
 
-class TextRelation < BoolExpression; end
+class TextRelation < LogicCompareExpression
+  child :left, Expression
+  child :right, Expression
+
+  def exec(var)
+    case @type
+      when '==' then
+        @left.exec(var) == @right.exec(var)
+      when '!=' then
+        @left.exec(var) != @right.exec(var)
+      else
+        raise "Unknown operation #{@type} on texts"
+    end
+  end
+end
 
 
 
