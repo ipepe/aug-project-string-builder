@@ -3,7 +3,7 @@ GEM
   specs:
     coderay (1.1.1)
     colorize (0.8.1)
-    ffi (1.9.10)
+    ffi (1.11.1)
     filigree (0.3.3)
     method_source (0.8.2)
     pry (0.10.3)
